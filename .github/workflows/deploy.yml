@@ -51,6 +51,11 @@ jobs:
         run: |
           uv venv
           uv pip install mkdocs mkdocs-material
+          
+      # 必须：将 ~/.local/bin 加入 PATH，否则找不到 mkdocs 命令
+      - name: Add ~/.local/bin to PATH
+        run: |
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
 
       # 构建 MkDocs 站点
       - name: Build site
