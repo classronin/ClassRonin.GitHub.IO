@@ -49,7 +49,8 @@ jobs:
       # 使用 uv pip 安装 MkDocs 和相关依赖
       - name: Install dependencies with uv
         run: |
-          uv pip install --system mkdocs mkdocs-material
+          uv venv
+          uv pip install mkdocs mkdocs-material
 
       # 构建 MkDocs 站点
       - name: Build site
