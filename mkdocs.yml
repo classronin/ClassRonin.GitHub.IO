@@ -8,25 +8,24 @@ theme:
 extra: 
   generator: false  # 移除页脚中的"Made with"通知
   #homepage: https://example.com  # 首页图标 URL
-    
 
-  # 配置调色板（支持亮色/暗色切换）
-  palette:
-    # 亮色模式
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      toggle:
-        icon: material/lightbulb
-        name: Switch to dark mode
+# 配置调色板（支持亮色/暗色切换）
+palette:
+# 亮色模式
+- media: "(prefers-color-scheme: light)"
+  scheme: default
+  toggle:
+    icon: material/lightbulb
+    name: Switch to dark mode
 
-    # 暗色模式
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: cyan
-      accent: yellow
-      toggle:
-        icon: material/lightbulb-outline
-        name: Switch to light mode
+# 暗色模式
+- media: "(prefers-color-scheme: dark)"
+  scheme: slate
+  primary: cyan
+  accent: yellow
+  toggle:
+    icon: material/lightbulb-outline
+    name: Switch to light mode
 
   features:
     - navigation.instant            # 即时加载
