@@ -1,4 +1,5 @@
 site_name: 化复为易
+site_description: 专治各种蛋疼
 site_url: https://classronin.github.io
 theme:
   name: material
@@ -27,8 +28,9 @@ theme:
         icon: material/lightbulb-outline
         name: Switch to light mode
         
-# extra: # 首页图标 URL
-  # homepage: https://example.com 
+ extra: # 首页图标 URL
+   #homepage: https://example.com 
+   generator: false  # 移除页脚中的"Made with"通知
   
 
   features:
