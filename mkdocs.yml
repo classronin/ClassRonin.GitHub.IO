@@ -4,28 +4,43 @@ site_url: https://classronin.github.io
 theme:
   name: material
   language: zh
- 
-# 配置调色板（支持亮色/暗色切换）
-palette:
-# 亮色模式
-- media: "(prefers-color-scheme: light)"
-  scheme: default
-  toggle:
-    icon: material/lightbulb
-    name: Switch to dark mode
 
-# 暗色模式
-- media: "(prefers-color-scheme: dark)"
-  scheme: slate
-  primary: cyan
-  accent: yellow
-  toggle:
-    icon: material/lightbulb-outline
-    name: Switch to light mode
-    
 extra: 
+#homepage: https://example.com  # 首页图标 URL
   generator: false  # 移除页脚中的"Made with"通知
-  #homepage: https://example.com  # 首页图标 URL
+    
+# 代码块和内联代码块上突出显示语法，并允许直接包含来自其他文件的源代码 
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - attr_list   # 按钮 - 特殊语法将 HTML 属性和 CSS 类添加到几乎每个 Markdown 内联和块级元素
+  - def_list    # 定义列表 - 通过 Markdown 将定义列表（通常称为描述列表 - HTML 中的 dl）添加到文档的功能
+  - footnotes   # 脚注 - 定义内联脚注，然后将其呈现在文档的所有 Markdown 内容下方
+  
+  
+
+  # 配置调色板（支持亮色/暗色切换）
+  palette:
+    # 亮色模式
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      toggle:
+        icon: material/lightbulb
+        name: Switch to dark mode
+
+    # 暗色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: cyan
+      accent: yellow
+      toggle:
+        icon: material/lightbulb-outline
+        name: Switch to light mode
 
   features:
     - navigation.instant            # 即时加载
@@ -54,16 +69,5 @@ extra:
    # - stylesheets/extra.css  # 内容区域宽度  
    # - javascripts/extra.js   #  
   
-# 代码块和内联代码块上突出显示语法，并允许直接包含来自其他文件的源代码 
-markdown_extensions:
-  - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences
-  - attr_list   # 按钮 - 特殊语法将 HTML 属性和 CSS 类添加到几乎每个 Markdown 内联和块级元素
-  - def_list    # 定义列表 - 通过 Markdown 将定义列表（通常称为描述列表 - HTML 中的 dl）添加到文档的功能
-  - footnotes   # 脚注 - 定义内联脚注，然后将其呈现在文档的所有 Markdown 内容下方
+
  
