@@ -1,0 +1,73 @@
+name: Deploy MkDocs to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-inprogress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 安装指定版本的 uv (0.8.13)
+      - name: Install uv 0.8.13
+        uses: astral-sh/setup-uv@v1
+        with:
+          version: "0.8.13"  # 明确指定 uv 版本
+
+      # 使用 uv 安装 Python 3.12
+      - name: Set up Python 3.12 with uv
+        run: |
+          uv python install 3.12  # 明确指定 Python 版本
+
+- name: Cache uv dependencies
+  uses: actions/cache@v3
+  with:
+    path: |
+      ~/.cache/uv
+      ~/.uv-cache
+    key: ${{ runner.os }}-uv-${{ hashFiles('**/requirements.txt') }}-${{ hashFiles('**/pyproject.toml') }}
+    restore-keys: |
+      ${{ runner.os }}-uv-
+
+
+
+      # 使用 uv pip 安装 MkDocs 和相关依赖
+      - name: Install dependencies with uv
+        run: |
+          uv pip install mkdocs mkdocs-material
+
+      # 构建 MkDocs 站点
+      - name: Build site
+        run: |
+          mkdocs build --site-dir site
+
+      # 配置 GitHub Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v3
+
+      # 上传构建产物
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v2
+        with:
+          path: './site'
+
+      # 部署到 GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v2
