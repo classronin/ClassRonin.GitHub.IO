@@ -5,9 +5,10 @@ theme:
   name: material
   language: zh
  
-  extra: 
-   #homepage: https://example.com  # 首页图标 URL
-    generator: false  # 移除页脚中的"Made with"通知
+extra: 
+  generator: false  # 移除页脚中的"Made with"通知
+  #homepage: https://example.com  # 首页图标 URL
+    
 
   # 配置调色板（支持亮色/暗色切换）
   palette:
