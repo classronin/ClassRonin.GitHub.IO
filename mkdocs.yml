@@ -4,28 +4,7 @@ site_url: https://classronin.github.io
 theme:
   name: material
   language: zh
-
-extra: 
-#homepage: https://example.com  # 首页图标 URL
-  generator: false  # 移除页脚中的"Made with"通知
-    
-# 代码块和内联代码块上突出显示语法，并允许直接包含来自其他文件的源代码 
-markdown_extensions:
-  - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences
-  - attr_list   # 按钮 - 特殊语法将 HTML 属性和 CSS 类添加到几乎每个 Markdown 内联和块级元素
-  - def_list    # 定义列表 - 通过 Markdown 将定义列表（通常称为描述列表 - HTML 中的 dl）添加到文档的功能
-  - footnotes   # 脚注 - 定义内联脚注，然后将其呈现在文档的所有 Markdown 内容下方
-  
-  
-
-  # 配置调色板（支持亮色/暗色切换）
-  palette:
+  palette:    # 配置调色板（支持亮色/暗色切换）
     # 亮色模式
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -41,6 +20,25 @@ markdown_extensions:
       toggle:
         icon: material/lightbulb-outline
         name: Switch to light mode
+
+    
+# 代码块和内联代码块上突出显示语法，并允许直接包含来自其他文件的源代码 
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - attr_list   # 按钮 - 特殊语法将 HTML 属性和 CSS 类添加到几乎每个 Markdown 内联和块级元素
+  - def_list    # 定义列表 - 通过 Markdown 将定义列表（通常称为描述列表 - HTML 中的 dl）添加到文档的功能
+  - footnotes   # 脚注 - 定义内联脚注，然后将其呈现在文档的所有 Markdown 内容下方
+  
+extra: 
+#homepage: https://example.com  # 首页图标 URL
+  generator: false  # 移除页脚中的"Made with"通知 
+
 
   features:
     - navigation.instant            # 即时加载
