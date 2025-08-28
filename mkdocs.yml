@@ -28,9 +28,9 @@ theme:
         icon: material/lightbulb-outline
         name: Switch to light mode
         
- extra: # 首页图标 URL
+  extra: # 首页图标 URL
    #homepage: https://example.com 
-   generator: false  # 移除页脚中的"Made with"通知
+    generator: false  # 移除页脚中的"Made with"通知
   
 
   features:
