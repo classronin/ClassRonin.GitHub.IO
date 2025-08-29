@@ -3,88 +3,128 @@ site_description: 专治各种蛋疼
 site_url: https://classronin.github.io
 theme:
   name: material
-
+  language: zh
 
   features:
     - navigation.instant            # 即时加载
     - navigation.instant.prefetch   # 即时预取 
     - navigation.instant.progress   # 进度指示器 
     - navigation.instant.preview    # 即时预览
-    - navigation.tracking           # 锚点跟踪 - 地址栏中的 URL 会自动更新为目录中突出显示的活动锚点
-    # - navigation.tabs               # 导航选项卡 - 1220像素以上的视口，顶部显菜单，移动设备保持原样
-    - navigation.tabs.sticky        # 粘性导航选项卡 - 向下滚动时始终保持可见的顶部菜单
-    - navigation.sections           # 导航部分 - 1220 像素以上的视口，顶级分区在侧边栏组，移动设备上保持原样
-    - navigation.expand             # 导航扩展 - 左侧边栏默认展开所有可折叠的子部分，无需手动打开子部分
-    - navigation.path               # 导航路径 痕迹导航 - 每个页显标题上痕迹导航，屏幕较小的设备上访问文档时更容易定位
-    - navigation.prune              # 导航修剪 - 显示HTML中仅包含可见导航项，从而将构建站点的大小减少 33% 或更多
+    - navigation.tracking       # 锚点跟踪 - 地址栏中的 URL 会自动更新为目录中突出显示的活动锚点
+    #- navigation.tabs          # 导航选项卡 - 1220像素以上的视口，顶部显菜单，移动设备保持原样
+    - navigation.tabs.sticky    # 粘性导航选项卡 - 向下滚动时始终保持可见的顶部菜单
+    - navigation.sections       # 导航部分 - 1220 像素以上的视口，顶级分区在侧边栏组，移动设备上保持原样
+    - navigation.expand         # 导航扩展 - 左侧边栏默认展开所有可折叠的子部分，无需手动打开子部分
+    - navigation.path           # 导航路径 痕迹导航 - 每个页显标题上痕迹导航，屏幕较小的设备上访问文档时更容易定位
+    - navigation.prune          # 导航修剪 - 显示HTML中仅包含可见导航项，从而将构建站点的大小减少 33% 或更多
                                 # 此功能标志对于拥有 100+ 甚至 1,000+ 页的文档站点特别有用，因为导航占 HTML 的很大一部分。导航修剪将用指向该部分（或部分索引页面）中第一页的链接替换所有可展开的部分。
                                 
-    - navigation.indexes            # 章节索引页 - 将文档直接附加到章节，这对于提供概览页特别有用
-    - toc.follow                    # 锚点跟随 - 侧边栏会自动滚动，以便活动锚点始终可见
-    - toc.integrate                 # 导航集成 - 始终作为左侧导航侧边栏的一部分呈现
-    - navigation.top                # 返回顶部按钮 - 向下滚动后再次开始向上滚动将显示一个返回顶部按钮。在标题的中心和正下方
-    - content.code.copy     # 代码复制按钮 
-    - content.code.select   # 代码选择按钮
-    - content.code.annotate # 代码注解
-
-
-
-
-
+    - navigation.indexes      # 章节索引页 - 将文档直接附加到章节，这对于提供概览页特别有用 与toc.integrate不兼容
+    #- toc.integrate          # 导航集成 - 始终作为左侧导航侧边栏的一部分呈现 与navigation.indexes不兼容
+    - toc.follow              # 锚点跟随 - 侧边栏会自动滚动，以便活动锚点始终可见
+    - navigation.top          # 返回顶部按钮 - 向下滚动后再次开始向上滚动将显示一个返回顶部按钮。在标题的中心和正下方
+    - content.code.copy       # 代码复制按钮 
+    - content.code.select     # 代码选择按钮
+    - content.code.annotate   # 代码注解
+    - content.tabs.link       # 链接的内容选项卡 - 单击选项卡时，整个文档站点中的所有内容选项卡都将链接并切换到同一标签
 
   
-  
-  language: zh
   palette:    # 配置调色板（支持亮色/暗色切换）
     # 亮色模式
     - media: "(prefers-color-scheme: light)"
-      scheme: default
+      scheme: default  # 亮色模式/default slate
+      primary: black
       toggle:
         icon: material/lightbulb
         name: Switch to dark mode
 
     # 暗色模式
     - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: cyan
+      scheme: slate     # 暗色模式/slate
+      primary: black
       accent: yellow
       toggle:
         icon: material/lightbulb-outline
         name: Switch to light mode
 
-
-
-
-
-
-
-
-
     
 # 代码块和内联代码块上突出显示语法，并允许直接包含来自其他文件的源代码 
 markdown_extensions:
+  # 定义列表和任务列表
+  - pymdownx.tasklist:
+      custom_checkbox: true
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
-      pygments_lang_class: true
-  - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences
+      pygments_lang_class: true # 
+  - pymdownx.inlinehilite # 
+  - pymdownx.blocks.caption  # Caption 扩展增加了向任何 Markdown 块（包括图像、表格和代码块）添加标题的功能
+  - pymdownx.snippets # 
+  - pymdownx.superfences # 
+  
+  # 此配置启用内容选项卡，并允许在内容选项卡内嵌套任意内容，包括代码块和...更多内容选项卡
+  - pymdownx.tabbed:     # 
+      alternate_style: true # 
+  
+  - abbr        # Abbreviations 扩展增加了通过用 abbr 标记包装元素来向元素添加小工具提示的功能。仅支持纯文本（无标记）
+                # docs文件之外 includes/abbreviations.md
+                
   - attr_list   # 按钮 - 特殊语法将 HTML 属性和 CSS 类添加到几乎每个 Markdown 内联和块级元素
   - def_list    # 定义列表 - 通过 Markdown 将定义列表（通常称为描述列表 - HTML 中的 dl）添加到文档的功能
   - footnotes   # 脚注 - 定义内联脚注，然后将其呈现在文档的所有 Markdown 内容下方
+  - md_in_html   # HTML 中的 Markdown 扩展允许在 HTML 中编写 Markdown，对于自定义元素包装 Markdown 内容非常有用
+
+
+         
+
 
   
-extra: 
+  
+
+
+
+
+
+extra:  # 
 #homepage: https://example.com  # 首页图标 URL
   generator: false  # 移除页脚中的"Made with"通知 
-#extra_css:
- # - stylesheets/extra.css  # 内容区域宽度  
- # - javascripts/extra.js   #  
-
-
-
-
   
+
+
+#extra_css:
+  #- stylesheets/extra.css  #  
+extra_javascript: # 
+  - javascripts/extra.js # 
+
+
+
+plugins: # 
+   - search # 内置搜索插件
+   - glightbox:   #  图像 灯箱  pip install mkdocs-glightbox
+       touchNavigation: true
+       loop: false
+       effect: zoom
+       slide_effect: slide
+       width: 100%
+       height: auto
+       zoomable: true
+       draggable: true
+       skip_classes:
+         - custom-skip-class-name
+       auto_caption: false
+       caption_position: bottom
+       background: white
+       shadow: true
+       manual: false
+
+
+
+
+
+
+
+
+
+
 
  
