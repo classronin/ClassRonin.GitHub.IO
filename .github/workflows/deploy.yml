@@ -50,7 +50,7 @@ jobs:
       - name: Install dependencies with uv
         run: |
           uv venv
-          uv pip install mkdocs mkdocs-material
+          uv pip install mkdocs mkdocs-material mkdocs-glightbox
           
       # 必须：将 ~/.local/bin 加入 PATH，否则找不到 mkdocs 命令
       - name: Add venv bin to PATH
