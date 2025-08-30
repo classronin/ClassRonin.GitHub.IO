@@ -12,7 +12,7 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false  # 修正拼写错误
+  cancel-in-progress: false
 
 jobs:
   deploy:
@@ -22,22 +22,21 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      # 安装指定版本的 uv (0.8.13)
-      - name: Install uv 0.8.13
-        uses: astral-sh/setup-uv@v1
+      # 安装指定版本的 uv
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
         with:
-          version: "0.8.13"  # 明确指定 uv 版本
+          version: "0.8.13"
 
-      # 使用 uv 安装 Python 3.12
-      - name: Set up Python 3.12 with uv
-        run: |
-          uv python install 3.12  # 明确指定 Python 版本
+      # 设置 Python 版本
+      - name: Set up Python
+        run: uv python install 3.13
 
       # 缓存依赖
       - name: Cache uv dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cache/uv
@@ -46,31 +45,28 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-uv-
 
-      # 使用 uv pip 安装 MkDocs 和相关依赖
-      - name: Install dependencies with uv
+      # 使用 uv 安装依赖（从 requirements.txt）
+      - name: Install dependencies
         run: |
           uv venv
-          uv pip install mkdocs mkdocs-material mkdocs-glightbox
-          
-      # 必须：将 ~/.local/bin 加入 PATH，否则找不到 mkdocs 命令
-      - name: Add venv bin to PATH
-        run: |
-          echo "$GITHUB_WORKSPACE/.venv/bin" >> $GITHUB_PATH
+          source .venv/bin/activate
+          uv pip install -r requirements.txt
 
       # 构建 MkDocs 站点
       - name: Build site
         run: |
+          source .venv/bin/activate
           mkdocs build --site-dir site
 
       # 配置 GitHub Pages
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v5
 
       # 上传构建产物
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './site'
+          path: "./site"
 
       # 部署到 GitHub Pages
       - name: Deploy to GitHub Pages

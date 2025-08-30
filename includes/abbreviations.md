@@ -1,2 +1,10 @@
-*[HTML]: Hyper Text Markup Language
-[W3C]: World Wide Web Consortium
+*[HTML]: Hyper Text Markup Language 简称：超文本标记语言
+*[W3C]: World Wide Web Consortium 简称：万维网联盟
+*[二奶]:包二奶 - 已婚男性在婚外长期供养一名女性（“二奶”），与其保持稳定的情人关系，通常同居或有性关系，甚至生育子女，但不以合法夫妻名义登记结婚。
+
+*[bucket]:“Bucket” 在英文中是“桶”的意思，在技术或数据分析中，常被引申为“分类”或“分组”——就像把东西放进不同的桶里。
+
+
+
+
+
