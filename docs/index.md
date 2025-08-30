@@ -3,7 +3,7 @@ title: 《折腾者》
 ---
 
 !!! Example inline end ":fontawesome-solid-contact-book:{ .heart } 联系方式"
-	![ClassRonin](/img/ClassRonin.jpg "扫码加微信"){ width="210" align=right loading=lazy } 
+	![classronin](https://origin.picgo.net/2025/08/30/classronin45c36ac6f95aa095.jpg "扫码加微信"){ width="210" align=right loading=lazy } 
 
 
 # :man_curly_haired_tone1:{ title="我" }	  :rightwards_pushing_hand_tone1:{ title="推" }	__    :rock:{ title="石头" .slide-in }    __:arrow_upper_right:{ title="上" }		:mountain_snow:{ title="山" }
