@@ -8,7 +8,7 @@ title: Scoop 包管理器
 [Scoop 软件搜索](https://scoop.eallion.com/){ .md-button }
 ---
 
-### :material-text-box-edit: [Scoop 包管理器](https://github.com/ScoopInstaller/Scoop "来自Scoop官网")
+### [Scoop 包管理器](https://github.com/ScoopInstaller/Scoop "来自Scoop官网")
 
 === "安装" 
 	```powershell hl_lines="1"

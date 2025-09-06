@@ -3,15 +3,20 @@ site_description: 专治各种蛋疼
 site_url: https://classronin.github.io
 theme:
   name: material
+  custom_dir: overrides
   icon:
+    repo: fontawesome/brands/github   # github 图标
+
+    # 注释图标可以更改为与主题捆绑在一起的任何图标，甚至可以更改为自定义图标
+    annotation: material/alert-circle
     admonition:
       <type>: material/cursor-default-click
   language: zh
 
   features:
     - navigation.instant            # 即时加载
-    - navigation.instant.prefetch   # 即时预取 
-    - navigation.instant.progress   # 进度指示器 
+    - navigation.instant.prefetch   # 即时预取
+    - navigation.instant.progress   # 进度指示器
     - navigation.instant.preview    # 即时预览
     - navigation.tracking       # 锚点跟踪 - 地址栏中的 URL 会自动更新为目录中突出显示的活动锚点
     #- navigation.tabs          # 导航选项卡 - 1220像素以上的视口，顶部显菜单，移动设备保持原样
@@ -21,17 +26,24 @@ theme:
     - navigation.path           # 导航路径 痕迹导航 - 每个页显标题上痕迹导航，屏幕较小的设备上访问文档时更容易定位
     - navigation.prune          # 导航修剪 - 显示HTML中仅包含可见导航项，从而将构建站点的大小减少 33% 或更多
                                 # 此功能标志对于拥有 100+ 甚至 1,000+ 页的文档站点特别有用，因为导航占 HTML 的很大一部分。导航修剪将用指向该部分（或部分索引页面）中第一页的链接替换所有可展开的部分。
-                                
+
     - navigation.indexes      # 章节索引页 - 将文档直接附加到章节，这对于提供概览页特别有用 与toc.integrate不兼容
     #- toc.integrate          # 导航集成 - 始终作为左侧导航侧边栏的一部分呈现 与navigation.indexes不兼容
     - toc.follow              # 锚点跟随 - 侧边栏会自动滚动，以便活动锚点始终可见
     - navigation.top          # 返回顶部按钮 - 向下滚动后再次开始向上滚动将显示一个返回顶部按钮。在标题的中心和正下方
-    - content.code.copy       # 代码复制按钮 
+    - content.code.copy       # 代码复制按钮
     - content.code.select     # 代码选择按钮
-    - content.code.annotate   # 代码注解
+    - content.code.annotate   # 代码注解  (1) '1.  '
     - content.tabs.link       # 链接的内容选项卡 - 单击选项卡时，整个文档站点中的所有内容选项卡都将链接并切换到同一标签
     - content.tooltips        # 漂亮的小工具提示替换浏览器的标题属性渲染逻辑
-  
+
+    # 搜索
+    - search                  # 启用搜索 - 默认情况下，它处于启用状态，但当使用其他插件时，必须重新添加
+    - search.suggest          # 搜索将显示可以用 Right 键接受的最后一个单词的最可能完成情况
+    - search.highlight        # 搜索突出显示并且用户单击搜索结果时，点击链接后突出显示所有出现的内容。
+    - search.share            # 重置按钮旁边会呈现一个共享按钮，允许深度链接到当前搜索查询和结果
+
+
   palette:    # 配置调色板（支持亮色/暗色切换）
     # 亮色模式
     - media: "(prefers-color-scheme: light)"
@@ -50,72 +62,13 @@ theme:
         icon: material/lightbulb-outline
         name: Switch to light mode
 
-    
-# 代码块和内联代码块上突出显示语法，并允许直接包含来自其他文件的源代码 
-markdown_extensions:
-  - pymdownx.inlinehilite # 
-  - pymdownx.blocks.caption  # Caption 扩展增加了向任何 Markdown 块（包括图像、表格和代码块）添加标题的功能
-  - pymdownx.snippets # 
-  - pymdownx.details # 详细信息扩展增强了 Admonition 扩展，使生成的标注可折叠，允许用户打开和关闭它们
-  - tables
-  - pymdownx.tasklist: # 定义列表和任务列表
-      custom_checkbox: true
-
-  # Snippets 扩展可用于通过移动专用文件 1 中的所有缩写来实现简单的术语表，并通过以下配置将此文件自动附加到所有页面
-  # 当使用 docs 文件夹之外的专用文件时，将父目录添加到监视文件夹列表中，以便在更新术语表文件时，在运行 mkdocs serve 时自动重新加载项目。
-  # 1 强烈建议将包含缩写的 Markdown 文件放在 docs 文件夹之外（此处使用名称为 includes 的文件夹），否则 MkDocs 可能会抱怨未引用的文件
-  - pymdownx.snippets: 
-      auto_append:
-        - includes/abbreviations.md
-
-
-  - pymdownx.superfences: # SuperFences 扩展允许将代码和内容块任意嵌套在彼此内部，包括警告、选项卡、列表和所有其他元素
-      custom_fences: 
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
-
-
-  # 可以通过 图标搜索 发现的简单短代码来使用图标和表情符号
-  # https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/#search 
-  - pymdownx.emoji:  
-      emoji_index: !!python/name:material.extensions.emoji.twemoji
-      emoji_generator: !!python/name:material.extensions.emoji.to_svg
 
 
 
-  - pymdownx.highlight:
-      anchor_linenums: true
-      line_spans: __span
-      pygments_lang_class: true # 
-  - pymdownx.superfences
+# uv pip install mkdocs-material[imaging]
 
-  - pymdownx.tabbed:     # 此配置启用内容选项卡，并允许在内容选项卡内嵌套任意内容，包括代码块和...更多内容选项卡
-      alternate_style: true # 
-      slugify: !!python/object/apply:pymdownx.slugs.slugify
-        kwds:
-          case: lower
-  
-  - abbr        # Abbreviations 扩展增加了通过用 abbr 标记包装元素来向元素添加小工具提示的功能。仅支持纯文本（无标记）
-                # docs文件之外 includes/abbreviations.md
-  - admonition  # Admonition 扩展添加了对警示（通常称为标注 ）的支持，可以使用简单的语法在 Markdown 中定义             
-  - attr_list   # 按钮 - 特殊语法将 HTML 属性和 CSS 类添加到几乎每个 Markdown 内联和块级元素
-  - def_list    # 定义列表 - 通过 Markdown 将定义列表（通常称为描述列表 - HTML 中的 dl）添加到文档的功能
-  - footnotes   # 脚注 - 定义内联脚注，然后将其呈现在文档的所有 Markdown 内容下方
-  - md_in_html   # HTML 中的 Markdown 扩展允许在 HTML 中编写 Markdown，对于自定义元素包装 Markdown 内容非常有用
-
-
-
-extra:  # 
-#homepage: https://example.com  # 首页图标 URL
-  generator: false  # 移除页脚中的"Made with"通知 
-
-extra_css:
-  - stylesheets/extra.css  #  
-extra_javascript: # 
-  - javascripts/extra.js # 
-
-plugins: # 
+plugins: #
+  - tags # 内置标签插件  配置 使用标签对页面进行分类
   - search # 内置搜索插件
   - glightbox:   #  图像 灯箱  pip install mkdocs-glightbox
       touchNavigation: true
@@ -124,15 +77,105 @@ plugins: #
       slide_effect: slide
       width: 100%
       height: auto
-      zoomable: true
-      draggable: true
       skip_classes:
         - custom-skip-class-name
       auto_caption: false
-      caption_position: bottom
-      background: white
-      shadow: true
-      manual: false
+  #- meta: # Configuration 配置 一次为多个页面应用元数据
+    #  meta_file: .meta.yml  # 扫描 docs 目录时将查找的元文件名。通常没有必要更改此设置，但如果要更改它
 
 
- 
+
+
+
+
+# 代码块和内联代码块上突出显示语法，并允许直接包含来自其他文件的源代码
+markdown_extensions:
+  - pymdownx.inlinehilite #
+  - pymdownx.blocks.caption  # Caption 扩展增加了向任何 Markdown 块（包括图像、表格和代码块）添加标题的功能
+  - pymdownx.snippets #
+  - pymdownx.details # 详细信息扩展增强了 Admonition 扩展，使生成的标注可折叠，允许用户打开和关闭它们
+  - tables
+  - pymdownx.tasklist: # 定义列表和任务列表
+      custom_checkbox: true
+
+  # Snippets 扩展可用于通过移动专用文件 1 中的所有缩写来实现简单的术语表，并通过以下配置将此文件自动附加到所有页面
+  # 当使用 docs 文件夹之外的专用文件时，将父目录添加到监视文件夹列表中，以便在更新术语表文件时，在运行 mkdocs serve 时自动重新加载项目。
+  # 1 强烈建议将包含缩写的 Markdown 文件放在 docs 文件夹之外（此处使用名称为 includes 的文件夹），否则 MkDocs 可能会抱怨未引用的文件
+  - pymdownx.snippets:
+      auto_append:
+        - includes/abbreviations.md
+
+
+  - pymdownx.superfences: # SuperFences 扩展允许将代码和内容块任意嵌套在彼此内部，包括警告、选项卡、列表和所有其他元素
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
+
+  # 可以通过 图标搜索 发现的简单短代码来使用图标和表情符号
+  # https://squidfunk.github.io/mkdocs-material/reference/icons-emojis/#search
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+
+
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true #
+  - pymdownx.superfences # SuperFences 扩展允许将代码和内容块任意嵌套在彼此内部，包括警告、选项卡、列表和所有其他元素
+
+  - pymdownx.tabbed:     # 此配置启用内容选项卡，并允许在内容选项卡内嵌套任意内容，包括代码块和...更多内容选项卡
+      alternate_style: true #
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
+
+  - abbr        # Abbreviations 扩展增加了通过用 abbr 标记包装元素来向元素添加小工具提示的功能。仅支持纯文本（无标记）
+                # docs文件之外 includes/abbreviations.md
+  - admonition  # Admonition 扩展添加了对警示（通常称为标注 ）的支持，可以使用简单的语法在 Markdown 中定义
+  - attr_list   # 按钮 - 特殊语法将 HTML 属性和 CSS 类添加到几乎每个 Markdown 内联和块级元素
+  - def_list    # 定义列表 - 通过 Markdown 将定义列表（通常称为描述列表 - HTML 中的 dl）添加到文档的功能
+  - footnotes   # 脚注 - 定义内联脚注，然后将其呈现在文档的所有 Markdown 内容下方
+  - md_in_html   # HTML 中的 Markdown 扩展允许在 HTML 中编写 Markdown，对于自定义元素包装 Markdown 内容非常有用
+
+
+
+extra:  #
+#homepage: https://example.com  # 首页图标 URL
+  generator: false  # 移除页脚中的"Made with"通知
+
+extra_css:
+  - stylesheets/extra.css  #
+  - stylesheets/github-releases.css #
+extra_javascript: #
+  - javascripts/extra.js #
+  - javascripts/mirror-selector.js #
+  - javascripts/giscus.js #
+  - javascripts/github-releases-final.js #
+
+
+
+
+
+
+# ==========================================================
+# git-revision-date-localized 插件增加了对在每个页面底部添加上次更新和创建文档的日期的支持。安装
+# uv pip install mkdocs-git-revision-date-localized-plugin
+# ========================================
+#  - git-revision-date-localized:
+#      enable_creation_date: true
+
+#
+# 文档中显示项目存储库的链接
+#repo_url: https://github.com/classronin/classronin.github.io
+
+# MkDocs 将通过检查 URL 来推断源提供者，并尝试自动设置存储库名称 。
+#repo_name: classronin/classronin.github.io
+
+# 如果存储库 URL 指向有效的 GitHub、GitLab 或 Bitbucket 存储库，则 MkDocs 会提供一个名为 edit_uri 的设置，该设置解析为托管文档的子文件夹。
+#edit_uri: edit/main/docs/
+
+

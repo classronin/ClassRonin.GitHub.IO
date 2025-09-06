@@ -1,0 +1,55 @@
+.github-releases-info {
+    margin: 0.5em 0;
+    font-weight: bold;
+    color: var(--md-default-fg-color);
+}
+
+.github-releases-downloads {
+    margin: 0.5em 0;
+    padding-left: 1em;
+}
+
+.platform-group {
+    margin: 0.8em 0;
+    border-left: 3px solid var(--md-accent-fg-color);
+    padding-left: 1em;
+}
+
+.platform-group:first-child {
+    border-left-color: var(--md-accent-fg-color);
+}
+
+.platform-group:last-child {
+    border-left-color: var(--md-default-fg-color--light);
+}
+
+.platform-name {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    color: var(--md-accent-fg-color);
+}
+
+.github-release-download {
+    margin: 0.3em 0;
+}
+
+.github-release-download a {
+    color: var(--md-default-fg-color);
+    text-decoration: none;
+    display: inline-block;
+    padding: 0.2em 0.5em;
+    background-color: var(--md-default-bg-color--light);
+    border-radius: 0.2em;
+    transition: background-color 0.2s;
+}
+
+.github-release-download a:hover {
+    background-color: var(--md-accent-fg-color--light);
+    text-decoration: none;
+}
+
+.no-releases, .github-releases-error {
+    color: var(--md-default-fg-color--light);
+    font-style: italic;
+    margin: 0.5em 0;
+}

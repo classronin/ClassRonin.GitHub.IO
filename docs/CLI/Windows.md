@@ -2,9 +2,9 @@
 title: Windows 命令 
 ---
 
-### :material-text-box-edit: Windows 图形界面命令 
+### Windows 图形界面命令 
 
-!!! Example ":octicons-heart-fill-24:{ .heart } Windows 图形界面命令"
+!!! Example " Windows 图形界面命令"
 	=== " 配置/设备"
 		```cmd hl_lines="1 8"
 		系统信息与配置
