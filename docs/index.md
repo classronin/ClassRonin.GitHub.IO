@@ -1,28 +1,19 @@
 ---
-title: 《折腾者》
+title: 备忘记
 ---
 
 
-我推石头上山
 
-山：“你疯了？”
-
-我:“不疯，怎知路在脚下？”
-
-“我一夜夜调试，一行行删改，我不是天才，我只是不肯停下。”
-
-“我折腾，不是莽撞，是明知难，还敢撞。”
-
-“所以别问我累不累，问就是还在折腾，未完待续。”
+[GitHub镜像站 - Bgithub.xyz](Bgithub.xyz)
 
 
-Bgithub.xyz
+[Trail Sense](https://bgithub.xyz/kylecorry31/Trail-Sense)
+荒野工具，拥有备用设备和技能至关重要。
 
 
-(1) 
-{ .annotate }
 
-1.  喘气(1) 
-	{ .annotate }
 
-	1.  好了
+
+
+
+
