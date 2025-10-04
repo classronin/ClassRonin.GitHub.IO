@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>陆明珠的小工具</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --input-bg: #f5f5f5;
+            --input-border: #cccccc;
+            --accent-color: #e74c3c;
+            --button-bg: #f0f0f0;
+            --button-border: #cccccc;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #121212;
+            --text-color: #e0e0e0;
+            --input-bg: #2d2d2d;
+            --input-border: #444444;
+            --accent-color: #ff6b6b;
+            --button-bg: #333333;
+            --button-border: #555555;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 0 3vw;
+            transition: all 0.3s ease;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+            border-bottom: 1px solid var(--input-border);
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .theme-toggle {
+            background: var(--button-bg);
+            border: 1px solid var(--button-border);
+            color: var(--text-color);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            opacity: 0.8;
+        }
+
+        .calculator {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        input, select {
+            flex: 1;
+            max-width: 200px;
+            padding: 0.75rem;
+            background-color: var(--input-bg);
+            border: 1px solid var(--input-border);
+            color: var(--text-color);
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        .results {
+            margin-top: 2rem;
+            border-top: 1px solid var(--input-border);
+            padding-top: 1.5rem;
+        }
+
+        .result-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .salary {
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>陆明珠的小工具</h1>
+        <button class="theme-toggle" id="themeToggle">暗</button>
+    </header>
+
+    <main class="calculator">
+        <div class="input-group">
+            <label for="startTime">上班时间</label>
+            <input type="time" id="startTime" value="12:00" min="00:00" max="23:59">
+        </div>
+
+        <div class="input-group">
+            <label for="endTime">下班时间</label>
+            <input type="time" id="endTime" value="22:00" min="00:00" max="23:59">
+        </div>
+
+        <div class="input-group">
+            <label for="breakTime">休息时间</label>
+            <select id="breakTime">
+                <option value="0">0小时</option>
+                <option value="1" selected>1小时</option>
+                <option value="1.5">1.5小时</option>
+                <option value="2">2小时</option>
+                <option value="2.5">2.5小时</option>
+                <option value="3">3小时</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="legalMultiplier">法定倍数</label>
+            <select id="legalMultiplier">
+                <option value="1" selected>无</option>
+                <option value="3">三倍</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label for="hourlyRate">时薪</label>
+            <input type="number" id="hourlyRate" value="14.3" step="0.1" min="0">
+        </div>
+
+        <div class="results">
+            <div class="result-row">
+                <span>总时</span>
+                <span id="totalHours">10小时0分钟</span>
+            </div>
+            <div class="result-row">
+                <span>净时</span>
+                <span id="netHours">9小时0分钟</span>
+            </div>
+            <div class="result-row">
+                <span>休息</span>
+                <span id="breakDisplay">1.0小时</span>
+            </div>
+            <div class="result-row">
+                <span>时薪</span>
+                <span id="hourlyRateDisplay">14.30/小时</span>
+            </div>
+            <div class="result-row">
+                <span>薪资</span>
+                <span id="salary" class="salary">128.70</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // 主题切换功能
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.body.removeAttribute('data-theme');
+                themeToggle.textContent = '暗';
+            } else {
+                document.body.setAttribute('data-theme', 'dark');
+                themeToggle.textContent = '光';
+            }
+        });
+
+        // 计算功能
+        const startTime = document.getElementById('startTime');
+        const endTime = document.getElementById('endTime');
+        const breakTime = document.getElementById('breakTime');
+        const legalMultiplier = document.getElementById('legalMultiplier');
+        const hourlyRate = document.getElementById('hourlyRate');
+        
+        const totalHoursDisplay = document.getElementById('totalHours');
+        const netHoursDisplay = document.getElementById('netHours');
+        const breakDisplay = document.getElementById('breakDisplay');
+        const hourlyRateDisplay = document.getElementById('hourlyRateDisplay');
+        const salaryDisplay = document.getElementById('salary');
+
+        function calculate() {
+            // 获取输入值
+            const start = startTime.value;
+            const end = endTime.value;
+            const breakHours = parseFloat(breakTime.value);
+            const multiplier = parseFloat(legalMultiplier.value);
+            const rate = parseFloat(hourlyRate.value);
+
+            // 计算总工作时间
+            const startParts = start.split(':');
+            const endParts = end.split(':');
+            
+            let startMinutes = parseInt(startParts[0]) * 60 + parseInt(startParts[1]);
+            let endMinutes = parseInt(endParts[0]) * 60 + parseInt(endParts[1]);
+            
+            // 处理跨午夜情况
+            if (endMinutes < startMinutes) {
+                endMinutes += 24 * 60;
+            }
+            
+            const totalMinutes = endMinutes - startMinutes;
+            const totalHours = totalMinutes / 60;
+            
+            // 计算净工作时间
+            const netHours = totalHours - breakHours;
+            
+            // 格式化显示
+            const totalHoursFormatted = formatTime(totalHours);
+            const netHoursFormatted = formatTime(netHours);
+            
+            // 计算薪资
+            const salary = (netHours * rate * multiplier).toFixed(2);
+            
+            // 更新显示
+            totalHoursDisplay.textContent = totalHoursFormatted;
+            netHoursDisplay.textContent = netHoursFormatted;
+            breakDisplay.textContent = `${breakHours.toFixed(1)}小时`;
+            hourlyRateDisplay.textContent = `${rate.toFixed(2)}/小时`;
+            salaryDisplay.textContent = salary;
+        }
+
+        function formatTime(hours) {
+            const wholeHours = Math.floor(hours);
+            const minutes = Math.round((hours - wholeHours) * 60);
+            return `${wholeHours}小时${minutes}分钟`;
+        }
+
+        // 添加事件监听器
+        startTime.addEventListener('change', calculate);
+        endTime.addEventListener('change', calculate);
+        breakTime.addEventListener('change', calculate);
+        legalMultiplier.addEventListener('change', calculate);
+        hourlyRate.addEventListener('input', calculate);
+
+        // 初始计算
+        calculate();
+    </script>
+</body>
+</html>
