@@ -16,7 +16,7 @@ title: 备忘记
 
 ## 小工具
 ### 时工
-[时工](docs/html/index.html)
+[时工](html/index.html)
 
 
 
