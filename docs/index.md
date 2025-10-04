@@ -14,7 +14,9 @@ title: 备忘记
 [下载](https://bgithub.xyz/kylecorry31/Trail-Sense/releases/download/7.1.0/Trail-Sense-7.1.0-github-release.apk)
 
 
-
+## 小工具
+### 时工
+[时工](docs/html/index.html)
 
 
 
